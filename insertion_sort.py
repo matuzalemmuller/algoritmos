@@ -31,6 +31,7 @@ if __name__ == '__main__':
         array.append(random_number)
         i+=1
 
+    print(array)
     n = insertionSort(array) 
     print(array)
     print(n)
