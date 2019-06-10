@@ -205,7 +205,7 @@ void test_skip_list(int lenght){
     int array[lenght+10];   // Array is a bit longer so new values can be added
     int i, n = 0;
     int index;
-    int percent_20;
+    int percent_20 = lenght * 20 / 100;
     skiplist list;
 
     init_skip_list(&list);
@@ -225,7 +225,7 @@ void test_skip_list(int lenght){
     n = insert_node_in_skip(&list, array[i], rand() % 10000);
     printf("Number of steps taken to insert an additional element: %d\n", n);
 
-    percent_20 = lenght * 20 / 100;
+
     printf("\nDelete: n = %d\n", percent_20);
     for (n = 0, i = 0; i < percent_20; i++) {
         index = rand() % lenght;
