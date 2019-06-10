@@ -1,5 +1,9 @@
 # macOS temp file
 .DS_Store
 
-# Python temp files
+# VS code config file
+.vscode
+
+# Executables
+skiplist
 __pycache__

@@ -13,8 +13,7 @@ from random import randint
 
 if __name__ == '__main__': 
     random_number = 0
-    # size_of_arrays = 1, 4, 16, 64, 256, 1024, 4096, 16384, 65536
-    size_of_arrays = 1, 4, 16, 64, 256, 1024, 4096, 16384
+    size_of_arrays = 1, 4, 16, 64, 256, 1024, 4096, 16384, 65536
     array = [list() for _ in range(len(size_of_arrays))]
 
     for i in range(0, len(size_of_arrays)):
