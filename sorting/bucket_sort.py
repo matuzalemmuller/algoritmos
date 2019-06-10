@@ -3,53 +3,55 @@
 # Matuzalem Muller dos Santos
 # 2019/1
 from random import randint
+import insertion_sort
+import time
+import sys
 
 def bucket_sort(array):
-    num_buckets = len(array)
-    buckets = [[] for bucket in range(num_buckets)]
+    # n = 0
+    largest = max(array)
+    length = len(array)
+    size = largest/length
+ 
+    buckets = [[] for _ in range(length)]
+    for i in range(length):
+        j = int(array[i]/size)
+        if j != length:
+            buckets[j].append(array[i])
+        else:
+            buckets[length - 1].append(array[i])
+        # n += 1
+ 
+    for i in range(length):
+        # buckets[i], m = insertion_sort.insertion_sort(buckets[i])
+        # n += m
+        insertion_sort.insertion_sort(buckets[i])
+ 
+    array = []
+    for i in range(length):
+        array = array + buckets[i]
+ 
+    return array
 
-    for value in array:
-        index = value * num_buckets // (max(array) + 1)
-        buckets[index].append(value)
-
-    sorted_list = []
-    n = 1
-
-    for i in range(num_buckets):
-        next, m = insertion_sort(buckets[i])
-        sorted_list.extend(next)
-        n += m + 1              # Cost of insertion sort + extend list
-
-    return sorted_list, n
-
-def insertion_sort(array): 
-    n = 1
-    
-    for i in range(1, len(array)): 
-        n += 1
-        key = array[i] 
-        j = i-1
-        while j >= 0 and key < array[j]: 
-                n += 1
-                array[j + 1] = array[j] 
-                j -= 1
-        array[j + 1] = key
-    
-    return array, n
-  
 
 if __name__ == '__main__': 
     array = []
-    number_of_elements = 10
-    random_number = 0
+    random_number = 0  
+    try:
+        number_of_elements = int(sys.argv[1])
+    except:
+        number_of_elements = 10   
 
-    i = 0
-    while i < number_of_elements:
+    for i in range(0, number_of_elements):
         random_number = randint(1, 9_999_999_999)
         array.append(random_number)
-        i+=1
+    # print(array)
+    
+    start_time = time.time()
+    # array, n = bucket_sort(array)
+    array = bucket_sort(array)
+    running_time = time.time() - start_time
 
-    print(array)
-    array, n = bucket_sort(array)
-    print(array)
-    print(n)
+    # print(array)
+    # print(n)
+    print(running_time)

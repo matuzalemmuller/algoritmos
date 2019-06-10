@@ -2,55 +2,68 @@
 # PPGEAS - Introducao a Algoritmos
 # Matuzalem Muller dos Santos
 # 2019/1
+# Commented code is for calculating algorithm completixy and printing variables
 from random import randint
+import time
+import sys
 
-def mergeSort(array):
-    n = 0
+def merge_sort(array):
+    # n = 0
 
     if len(array) > 1:
         half = len(array) // 2
-        lArray = array[:half]
-        rArray = array[half:]
+        left_array = array[:half]
+        right_array = array[half:]
 
-        n += mergeSort(lArray)
-        n += mergeSort(rArray)
+        # n += merge_sort(left_array)
+        # n += merge_sort(right_array)
+        merge_sort(left_array)
+        merge_sort(right_array)
 
-        lMark, rMark, position = 0, 0, 0
+        left_mark, right_mark, position = 0, 0, 0
 
-        while lMark < len(lArray) and rMark < len(rArray):
-            if lArray[lMark] < rArray[rMark]:
-                array[position] = lArray[lMark]
-                lMark += 1
+        while left_mark < len(left_array) and right_mark < len(right_array):
+            if left_array[left_mark] < right_array[right_mark]:
+                array[position] = left_array[left_mark]
+                left_mark += 1
             else:
-                array[position] = rArray[rMark]
-                rMark += 1
+                array[position] = right_array[right_mark]
+                right_mark += 1
             position += 1
-            n += 1
+            # n += 1
 
-        while lMark < len(lArray):
-            array[position] = lArray[lMark]
-            lMark += 1
+        while left_mark < len(left_array):
+            array[position] = left_array[left_mark]
+            left_mark += 1
             position += 1
-            n += 1
-        while rMark < len(rArray):
-            array[position] = rArray[rMark]
-            rMark += 1
+            # n += 1
+        while right_mark < len(right_array):
+            array[position] = right_array[right_mark]
+            right_mark += 1
             position += 1
-            n += 1
-
-    return n
+            # n += 1
+    # return array, n
+    return array
 
 
 if __name__ == '__main__': 
     array = []
-    number_of_elements = 10
+    random_number = 0
+    try:
+        number_of_elements = int(sys.argv[1])
+    except:
+        number_of_elements = 10
 
-    i = 0
-    while i < number_of_elements:
-        array.append(randint(1, 9_999_999_999))
-        i+=1
+    for i in range(0, number_of_elements):
+        random_number = randint(1, 9_999_999_999)
+        array.append(random_number)
+    # print(array)
 
-    print(array)
-    n = mergeSort(array)
-    print(array)
-    print(n)
+    start_time = time.time()
+    # array, n = merge_sort(array)
+    array = merge_sort(array)
+    running_time = time.time() - start_time
+
+    # print(array)
+    # print(n)
+    print(running_time)

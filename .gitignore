@@ -1,2 +1,5 @@
 # macOS temp file
 .DS_Store
+
+# Python temp files
+__pycache__
