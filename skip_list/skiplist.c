@@ -200,107 +200,51 @@ void print_skip_list(skiplist *s) {
 }
 
 //------------------------------------------------------------------------------
-int main(){
-    int n = 0;
-    int lenght_256 = 256;
-    int lenght_4k = 4096;
-    int lenght_65k = 65536;
-    int array_256[lenght_256+10];
-    int array_4k[lenght_4k+10];
-    int array_65k[lenght_65k+10];
-    int i;
-    int percent_20;
+// Tests insertion and deletion of values in skip list
+void test_skip_list(int lenght){
+    int array[lenght+10];   // Array is a bit longer so new values can be added
+    int i, n = 0;
     int index;
+    int percent_20;
     skiplist list;
 
     init_skip_list(&list);
 
-
     printf("---------------------------------------------------------------\n");
-    for (i = 0; i < lenght_256; i++) {
-        array_256[i] = rand() % 100;
+    for (i = 0; i < lenght; i++) {
+        array[i] = rand() % 100;
         // printf("%d ", array_256[i]);
     }
 
-    printf("\nInsert: n = %d\n", lenght_256);
-    for (i = 0; i < lenght_256; i++) {
-        n += insert_node_in_skip(&list, array_256[i], rand() % 10000);
+    printf("\nInsert: n = %d\n", lenght);
+    for (i = 0; i < lenght; i++) {
+        n += insert_node_in_skip(&list, array[i], rand() % 10000);
     }
-    printf("Number of steps taken to insert %d values: %d\n", lenght_256, n);
+    printf("Number of steps taken to insert %d values: %d\n", lenght, n);
 
-    n = insert_node_in_skip(&list, array_256[i], rand() % 10000);
+    n = insert_node_in_skip(&list, array[i], rand() % 10000);
     printf("Number of steps taken to insert an additional element: %d\n", n);
 
-    percent_20 = lenght_256 * 20 / 100;
+    percent_20 = lenght * 20 / 100;
     printf("\nDelete: n = %d\n", percent_20);
     for (n = 0, i = 0; i < percent_20; i++) {
-        index = rand() % lenght_256;
-        n += remove_from_skip(&list, array_256[index]);
+        index = rand() % lenght;
+        n += remove_from_skip(&list, array[index]);
         // printf("%d ", n);
     }
     printf("Number of steps taken to delete %d values: %d\n", percent_20, n);
 
-    index = rand() % lenght_256;
-    n = remove_from_skip(&list, array_256[index]);
+    index = rand() % lenght;
+    n = remove_from_skip(&list, array[index]);
     printf("Number of steps taken to delete an additional element: %d\n", n);
+}
 
-   
-    printf("---------------------------------------------------------------\n");
-    for (i = 0; i < lenght_4k; i++) {
-        array_4k[i] = rand() % 100;
-        // printf("%d ", array_4k[i]);
-    }
+//------------------------------------------------------------------------------
+int main(){
 
-    printf("\nInsert: n = %d\n", lenght_4k);
-    for (i = 0; i < lenght_4k; i++) {
-        n += insert_node_in_skip(&list, array_4k[i], rand() % 10000);
-    }
-    printf("Number of steps taken to insert %d values: %d\n", lenght_4k, n);
-
-    n = insert_node_in_skip(&list, array_4k[i], rand() % 10000);
-    printf("Number of steps taken to insert an additional element: %d\n", n);
-
-    percent_20 = lenght_4k * 20 / 100;
-    printf("\nDelete: n = %d\n", percent_20);
-    for (n = 0, i = 0; i < percent_20; i++) {
-        index = rand() % lenght_4k;
-        n += remove_from_skip(&list, array_4k[index]);
-        // printf("%d ", n);
-    }
-    printf("Number of steps taken to delete %d values: %d\n", percent_20, n);
-
-    index = rand() % lenght_4k;
-    n = remove_from_skip(&list, array_4k[index]);
-    printf("Number of steps taken to delete an additional element: %d\n", n);
-
-
-    printf("---------------------------------------------------------------\n");
-    for (i = 0; i < lenght_65k; i++) {
-        array_65k[i] = rand() % 100;
-        // printf("%d ", array_65k[i]);
-    }
-
-    printf("\nInsert: n = %d\n", lenght_65k);
-    for (i = 0; i < lenght_65k; i++) {
-        n += insert_node_in_skip(&list, array_65k[i], rand() % 10000);
-    }
-    printf("Number of steps taken to insert %d values: %d\n", lenght_65k, n);
-
-    n = insert_node_in_skip(&list, array_65k[i], rand() % 10000);
-    printf("Number of steps taken to insert an additional element: %d\n", n);
-
-    percent_20 = lenght_65k * 20 / 100;
-    printf("\nDelete: n = %d\n", percent_20);
-    for (n = 0, i = 0; i < percent_20; i++) {
-        index = rand() % lenght_65k;
-        n += remove_from_skip(&list, array_65k[index]);
-        // printf("%d ", n);
-    }
-    printf("Number of steps taken to delete %d values: %d\n", percent_20, n);
-
-    index = rand() % lenght_65k;
-    n = remove_from_skip(&list, array_65k[index]);
-    printf("Number of steps taken to delete an additional element: %d\n", n);
+    test_skip_list(256);
+    test_skip_list(4096);
+    test_skip_list(65536);
 
     return 0;
 }
